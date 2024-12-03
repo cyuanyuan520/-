@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/tanhua-app-server/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/tanhua-autoconfig/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/tanhua-commons/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/tanhua-dubbo/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/tanhua-dubbo/tanhua-dubbo-db/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/tanhua-dubbo/tanhua-dubbo-interface/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/tanhua-dubbo/tanhua-dubbo-mongo/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/tanhua-gateway/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/tanhua-model/src/main/java" charset="UTF-8" />
+  </component>
+</project>

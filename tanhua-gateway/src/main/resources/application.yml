@@ -1,0 +1,41 @@
+server:
+  port: 8888
+
+spring:
+  profiles:
+    active: prod
+  application:
+    name: tanhua-gateway
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 192.168.80.166:8848
+    gateway:
+      globalcors:
+        add-to-simple-url-handler-mapping: true
+        cors-configurations:
+          '[/**]':
+            allowedHeaders: "*"
+            allowedOrigins: "*"
+            allowedMethods:
+              - GET
+              - POST
+              - DELETE
+              - PUT
+              - OPTION
+      routes:
+        - id: tanhua-app-server
+          uri: lb://tanhua-app-server
+          predicates:
+            - Path=/app/**
+          filters:
+            - StripPrefix=1
+
+        - id: tanhua-admin
+          uri: lb://tanhua-admin
+          predicates:
+            - Path=/admin/**
+          filters:
+            - StripPrefix=1
+gateway:
+  excludeUrls: /user/login,/user/loginVerification,/system/users/verification,/system/users/login

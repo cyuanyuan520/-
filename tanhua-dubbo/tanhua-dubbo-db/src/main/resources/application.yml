@@ -1,0 +1,41 @@
+#访问端口
+server:
+  port: 18081
+#数据库配置
+spring:
+  application:
+    name: tanhua-dubbo-db
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    username: root
+    password: 123456
+    #useUnicode=true&characterEncoding=utf8 : 设置编码方式
+    #autoReconnect=true 如果连接失败重新连接
+    #allowMultiQueries=true 1.可以在sql语句后携带分号，实现多语句执行。 2.可以执行批处理，同时发出多个SQL语句。
+    #useSSL=false MySQL在高版本需要指明是否进行SSL连接
+    url: jdbc:mysql://localhost:3306/tanhua?useUnicode=true&characterEncoding=utf8&autoReconnect=true&allowMultiQueries=true&useSSL=false
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 192.168.80.166:8848
+
+#dubbo配置
+dubbo:
+  protocol:
+    name: dubbo
+    port: 20881
+  registry:
+    address: spring-cloud://localhost
+  scan:
+    base-packages: com.tanhua.dubbo.api
+
+#Mybatis plus配置
+mybatis-plus:
+  global-config:
+    db-config:
+      table-prefix: tb_
+      id-type: auto
+      map-underscore-to-camel-case: true #仅仅是为了将查询结果映射到 Java 对象字段，而不是用于转换 SQL 查询本身
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
