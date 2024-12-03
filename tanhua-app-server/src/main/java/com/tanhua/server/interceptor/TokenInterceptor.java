@@ -16,11 +16,11 @@ public class TokenInterceptor implements HandlerInterceptor {
         //从请求头获取token
         String token = request.getHeader("Authorization");
         //验证token是否有效
-        boolean checked = JwtUtils.verifyToken(token);
-        //响应数据
-        if (!checked) {
-            throw new BusinessException(ErrorResult.tokenError()); //token不合法:使用401状态码拦截
-        } else {
+//        boolean checked = JwtUtils.verifyToken(token);
+//        //响应数据
+//        if (!checked) {
+//            throw new BusinessException(ErrorResult.tokenError()); //token不合法:使用401状态码拦截
+//        } else {
             //token正常可用则放行
                 //解析token并将User对象存入threadLocal
             Claims claims = JwtUtils.getClaims(token);
@@ -32,7 +32,7 @@ public class TokenInterceptor implements HandlerInterceptor {
             user.setId(Long.valueOf(id));
             UserHolder.set(user);//在拦截器中把合法token中包含的用户信息设置到threadLocal中
             return true;
-        }
+//        }
     }
 
     /**

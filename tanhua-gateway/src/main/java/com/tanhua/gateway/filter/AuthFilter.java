@@ -21,9 +21,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@Component
 public class AuthFilter implements GlobalFilter, Ordered {
 
-    @Value("${gateway.excludeUrls}")
+    @Value("${gateway.excludedUrls}")
     private List<String> excludeUrls;//不需要校验的链接
 
     @Override
@@ -45,7 +46,7 @@ public class AuthFilter implements GlobalFilter, Ordered {
             responseMap.put("errMessage", "用户未登录");
             return responseError(exchange.getResponse(), responseMap);
         }
-        return null;
+        return chain.filter(exchange);
     }
 
     @Override

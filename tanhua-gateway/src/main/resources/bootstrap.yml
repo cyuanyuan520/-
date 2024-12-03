@@ -1,0 +1,13 @@
+spring:
+  profiles:
+    active: prod
+  application:
+    name: tanhua-gateway
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 192.168.80.166:8848
+      config:
+        server-addr: 192.168.80.166:8848
+        file-extension: yml
+
