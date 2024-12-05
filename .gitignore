@@ -11,8 +11,6 @@ target/
 *.iws
 *.iml
 *.ipr
-# 忽略OssTest.java文件
-tanhua-app-server/src/test/java/com/itheima/test/OssTest.java
 
 ### Eclipse ###
 .apt_generated
