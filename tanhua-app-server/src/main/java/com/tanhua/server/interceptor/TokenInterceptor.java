@@ -21,17 +21,17 @@ public class TokenInterceptor implements HandlerInterceptor {
 //        if (!checked) {
 //            throw new BusinessException(ErrorResult.tokenError()); //token不合法:使用401状态码拦截
 //        } else {
-            //token正常可用则放行
-                //解析token并将User对象存入threadLocal
-            Claims claims = JwtUtils.getClaims(token);
-            String mobile = (String) claims.get("mobile");//获取qq号码
-            Integer id = (Integer) claims.get("id");//获取用户id
+        //token正常可用则放行
+        //解析token并将User对象存入threadLocal
+        Claims claims = JwtUtils.getClaims(token);
+        String mobile = (String) claims.get("mobile");//获取qq号码
+        Integer id = (Integer) claims.get("id");//获取用户id
 
-            User user = new User();
-            user.setMobile(mobile);
-            user.setId(Long.valueOf(id));
-            UserHolder.set(user);//在拦截器中把合法token中包含的用户信息设置到threadLocal中
-            return true;
+        User user = new User();
+        user.setMobile(mobile);
+        user.setId(Long.valueOf(id));
+        UserHolder.set(user);//在拦截器中把合法token中包含的用户信息设置到threadLocal中
+        return true;
 //        }
     }
 

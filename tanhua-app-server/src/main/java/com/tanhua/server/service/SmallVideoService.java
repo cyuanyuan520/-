@@ -302,6 +302,7 @@ public class SmallVideoService {
         //mongodb: likeCount+1
         videoCommentApi.likeComment(id);
     }
+
     /**
      * 取消点赞视频下方评论
      * 传入评论id

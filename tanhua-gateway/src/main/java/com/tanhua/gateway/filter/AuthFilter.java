@@ -24,27 +24,32 @@ import java.util.Map;
 @Component
 public class AuthFilter implements GlobalFilter, Ordered {
 
-    @Value("${gateway.excludedUrls}")
+    @Value("#{'${gateway.excludedUrls}'.split(',')}")
     private List<String> excludeUrls;//不需要校验的链接
 
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
-        //1.排除不需要校验的请求
-        String path = exchange.getRequest().getURI().getPath();
-        if (excludeUrls.contains(path)) {
+        String url = exchange.getRequest().getURI().getPath();
+
+        System.out.println( "url:"+ url);
+        //排除特殊接口 不校验
+        if(excludeUrls.contains(url)){
             return chain.filter(exchange);
         }
-        //获取token并校验
         String token = exchange.getRequest().getHeaders().getFirst("Authorization");
-        if (!StringUtils.isEmpty(token)) {
-            token = token.replaceAll("Bearer ", "");
+        if(!StringUtils.isEmpty(token)){
+            token = token.replace("Bearer ", "");
         }
-        boolean verified = JwtUtils.verifyToken(token);
-        if (!verified) {
-            Map<String, Object> responseMap = new HashMap<String, Object>();
-            responseMap.put("errorCode", 401);
-            responseMap.put("errMessage", "用户未登录");
-            return responseError(exchange.getResponse(), responseMap);
+        ServerHttpResponse response = exchange.getResponse();
+
+        //2、使用工具类，判断token是否有效
+        boolean verifyToken = JwtUtils.verifyToken(token);
+        //3、如果token失效，返回状态码401，拦截
+        if(!verifyToken) {
+            Map<String, Object> responseData = new HashMap<>();
+            responseData.put("errCode", 401);
+            responseData.put("errMessage", "用户未登录");
+            return responseError(response,responseData);
         }
         return chain.filter(exchange);
     }
